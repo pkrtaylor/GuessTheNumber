@@ -1,5 +1,14 @@
 import { useState } from 'react'
-import {TextInput, View, StyleSheet, Alert, Text} from 'react-native'
+import {
+    TextInput, 
+    View, 
+    StyleSheet, 
+    Alert, 
+    Dimensions, 
+    useWindowDimensions,
+    KeyboardAvoidingView,
+    ScrollView 
+        } from 'react-native'
 import Colors from '../constants/colors'
 import PrimaryButton from '../components/ui/PrimaryButton'
 import Title from '../components/ui/Title'
@@ -13,8 +22,12 @@ function StartGameScreen({onPickNumber}){
     //we have it as a string since we are going to bind it to the TextInput Component 
     //by binding we mean we set the value prop to the state "enteredNumber"
     
+    const { width, height } = useWindowDimensions();
+    //intertally this hook will watch the device dimensions, and when ever they change,
+    //this component function will be executed and retunr an updated width and height
+    
     function numberInputHandler(enteredText){
-            setEnteredNumber(enteredText);
+            setEnteredNumber(enteredText); 
     }
 
     function resetInputHandler(){
@@ -38,8 +51,15 @@ function StartGameScreen({onPickNumber}){
     } 
     //note to self the onPress prop in the primary button is not a built in prop, its custom 
     //the onPress prop in pressable component is builtin 
+
+
+
+    const marginTopDistance = height < 380 ? 30 : 100;
+
     return(
-        <View style={styles.rootContainer}>
+        <ScrollView style={styles.screen}>
+        <KeyboardAvoidingView style={styles.screen} behavior="position">
+        <View style={[styles.rootContainer, {marginTop: marginTopDistance}]} >
          <Title>Guess My Number</Title>
          <Card>
             <InstructionText>Guess My Number</InstructionText>
@@ -66,16 +86,22 @@ function StartGameScreen({onPickNumber}){
             </View>
          </Card>
         </View>
+        </KeyboardAvoidingView>
+        </ScrollView>
     )
 }
 
 export default StartGameScreen
 
+//const deviceHeight = Dimensions.get('window').height
 const styles = StyleSheet.create({
+    screen: {
+        flex: 1,
+    },
 
     rootContainer: {
         flex: 1,
-        marginTop: 100,
+        //marginTop: deviceHeight < 400 ? 30 : 100,
         alignItems: 'center'
     },
 

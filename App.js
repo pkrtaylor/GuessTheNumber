@@ -9,6 +9,7 @@ import AppLoading from 'expo-app-loading'
 
 //fonts
 import {useFonts} from 'expo-font'
+import { StatusBar } from 'expo-status-bar';
 export default function App() {
 
   const [userNumber, setUserNumber] = useState()
@@ -56,6 +57,8 @@ export default function App() {
 
   //we place the rootScreen style in the image background so it also takes up the whole spce 
   return (
+    <>
+    <StatusBar style='light'/>
     <LinearGradient colors={[Colors.primary700, Colors.accent500]} style={styles.rootScreen}>
       <ImageBackground 
       source={require('./assets/images/background.png')}
@@ -68,6 +71,7 @@ export default function App() {
       </SafeAreaView>
       </ImageBackground>
     </LinearGradient>
+    </>
   );
 }
 
