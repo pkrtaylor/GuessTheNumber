@@ -1,5 +1,5 @@
 # GuessTheNumber
-
+---
 Guess My Number is a small game created utilizing react native. This game has three screens, the StartGameScreen, GameScreen, and the GameOver Screen. These screens are 
 handled using condtional rendering, based on state. 
 On the start of the app, the StartGameScreen reamins until the player picks a number.
